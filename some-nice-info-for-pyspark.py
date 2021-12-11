@@ -37,11 +37,10 @@ from pyspark.conf import SparkConf
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-
 # In[4]:
 
 
-spark = SparkSession.builder     .master("local")     .appName("pyspark_giris")     .getOrCreate()
+spark = SparkSession.builder.master("local").appName("pyspark_giris").getOrCreate()
     
 sc = spark.sparkContext
 
@@ -159,19 +158,6 @@ spark_df.printSchema()
 
 spark_df.dtypes
 
-
-# In[22]:
-
-
-# Sparkin calisma tarzi output olarak vermez, normlde binlerce deger gelmesi lazim.
-# Bu sparki hizlandirir.
-
-spark_df.Age
-
-
-# In[23]:
-
-
 spark_df.select('age')
 
 
@@ -196,19 +182,7 @@ spark_df.head()
 
 spark_df.take(5)
 
-
-# In[27]:
-
-
-# show sparkin temel komutlarindandir
-
 spark_df.show(5)
-
-
-# In[28]:
-
-
-# Değişken isimlerinin küçültülmesi
 
 spark_df = spark_df.toDF(*[c.lower() for c in spark_df.columns])
 
@@ -232,9 +206,6 @@ spark_df
 
 
 # In[32]:
-
-
-# koseli parantez olmadan
 
 spark_df.describe('age', 'churn').show()
 
@@ -677,7 +648,7 @@ print("accuracy: %f, precision: %f, recall: %f, f1: %f, roc_auc: %f" % (acc, pre
 
 # In[ ]:
 
-
+acc = evaluatorMulti.evaluate(y_pred, {evaluatorMulti.metricName: "accuracy"})
 gbm = GBTClassifier(maxIter=100, featuresCol="features", labelCol="label")
 gbm_model = gbm.fit(train_df)
 y_pred = gbm_model.transform(test_df)

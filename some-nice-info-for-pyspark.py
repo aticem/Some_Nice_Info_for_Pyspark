@@ -20,8 +20,6 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
         print(os.path.join(dirname, filename))
 
 
-aaaaaaaaaaaaaaaaaaa
-
 import pyspark
 import warnings
 import pandas as pd

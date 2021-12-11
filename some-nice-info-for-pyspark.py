@@ -19,6 +19,9 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
 
+
+aaaaaaaaaaaaaaaaaaa
+
 import pyspark
 import warnings
 import pandas as pd
@@ -791,5 +794,3 @@ def pandas_log(col):
     return np.log(col)
 
 spark_df.withColumn('age_log', pandas_log(spark_df.age)).show(5)
-
-ssadasdasdas

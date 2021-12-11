@@ -562,9 +562,8 @@ cols = ['age', 'total_purchase', 'account_manager', 'years',
 
 # In[78]:
 
-
 va = VectorAssembler(inputCols=cols, outputCol="features")
-
+va_df = va.transform(spark_df)
 final_df = va_df.select("features", "label")
 
 
@@ -633,7 +632,7 @@ evaluatorMulti = MulticlassClassificationEvaluator(labelCol="label", predictionC
 
 # In[ ]:
 
-
+acc = evaluatorMulti.evaluate(y_pred, {evaluatorMulti.metricName: "accuracy"})
 roc_auc = evaluator.evaluate(y_pred)
 precision = evaluatorMulti.evaluate(y_pred, {evaluatorMulti.metricName: "precisionByLabel"})
 recall = evaluatorMulti.evaluate(y_pred, {evaluatorMulti.metricName: "recallByLabel"})
@@ -648,9 +647,6 @@ print("accuracy: %f, precision: %f, recall: %f, f1: %f, roc_auc: %f" % (acc, pre
 
 # # GBM
 
-# In[ ]:
-
-acc = evaluatorMulti.evaluate(y_pred, {evaluatorMulti.metricName: "accuracy"})
 gbm = GBTClassifier(maxIter=100, featuresCol="features", labelCol="label")
 gbm_model = gbm.fit(train_df)
 y_pred = gbm_model.transform(test_df)

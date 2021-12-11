@@ -563,7 +563,9 @@ cols = ['age', 'total_purchase', 'account_manager', 'years',
 # In[78]:
 
 
-va = VectorAssembler(inputCols=cols, outputCol="features")final_df = va_df.select("features", "label")
+va = VectorAssembler(inputCols=cols, outputCol="features")
+
+final_df = va_df.select("features", "label")
 
 
 # In[ ]:
